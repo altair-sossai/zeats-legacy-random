@@ -6,7 +6,7 @@
 
 # zeats-legacy-random
 
-Extensions to solve common problems when using strings
+Extensions to solve common problems when using random values
 
 [![Build Status](https://dev.azure.com/zeats/Legacy/_apis/build/status/zeats-legacy-random?branchName=master)](https://dev.azure.com/zeats/Legacy/_build/latest?definitionId=17&branchName=master)
 [![NuGet](https://img.shields.io/nuget/v/Zeats.Legacy.Random.svg)](https://www.nuget.org/packages/Zeats.Legacy.Random)
@@ -19,66 +19,54 @@ Install-Package Zeats.Legacy.Random
 
 ## Extensions
 
-### string.FirstCharToUpper()
-Upercase the first position of the string
+### RandomGenerator.NextBool(double chance = 0.5)
+Return a random bool
 ```c#
-"lorem ipsum dolor".FirstCharToUpper() /* return "Lorem ipsum dolor" */
-"lOREM IPSUM DOLOR".FirstCharToUpper() /* return "LOREM IPSUM DOLOR" */
-"LOREM IPSUM DOLOR".FirstCharToUpper() /* return "LOREM IPSUM DOLOR" */
+RandomGenerator.NextBool() /* returns true or false with a 50% chance of true */
+RandomGenerator.NextBool(0.3) /* returns true or false with a 30% chance of true */
 ```
 ---
 
-### string.SafeSubstring(int start, int length)
-Ensures the realization of the substring without throwing exception
+### RandomGenerator.NextDouble()
+Return a random double
 ```c#
-"12345 7890".SafeSubstring(start: 0, length: 9999) /* return "12345 7890" */
-"12345 7890".SafeSubstring(start: 0, length: 1) /* return "1" */
-"12345 7890".SafeSubstring(start: 0, length: 6) /* return "12345 " */
+RandomGenerator.NextDouble() /* returns value beetwen 0..1 */
 ```
 ---
 
-### string.AlignRight(char paddingChar = ' ')
-Right align content of a string
+### RandomGenerator.NextInt32(int min, int max)
+Return a random int
 ```c#
-"Lorem Ipsum".AlignRight() /* return "Lorem Ipsum" */
-"  Lorem Ipsum  ".AlignRight() /* return "    Lorem Ipsum" */
-"  Lorem Ipsum  ".AlignRight('X') /* return "XXXXLorem Ipsum" */
+RandomGenerator.NextInt32(10, 20) /* returns value beetwen 10..20 */
 ```
 ---
 
-### string.PadBoth(char paddingChar = ' ')
-### string.PadBoth(int length, char paddingChar = ' ')
-Pad both sides of a string
+### RandomGenerator.NextDate(DateTime min, DateTime max)
+Return a random DateTime
 ```c#
-"Lorem Ipsum".PadBoth() /* return "Lorem Ipsum" */
-"Lorem Ipsum".PadBoth(length: 20) /* return "    Lorem Ipsum     " */
-"  Lorem Ipsum  ".PadBoth(paddingChar: 'X') /* "XXLorem IpsumXX" */
-"  Lorem Ipsum  ".PadBoth(length: 20, paddingChar:'X') /* return "XX  Lorem Ipsum  XXX" */
+var min = new DateTime(2000, 9, 5, 8, 0, 0);
+var max = new DateTime(2020, 9, 5, 8, 0, 0);
+RandomGenerator.NextDate(min, max) /* returns value beetwen min..max */
 ```
 ---
 
-### string.HasOnlyNumbers()
-Checks if a string has only 0-9 numbers
+### RandomGenerator.NextDecimal(int min, int max)
+Return a random decimal
 ```c#
-"123a".HasOnlyNumbers() /* return false */
-"192".HasOnlyNumbers() /* return true */
+RandomGenerator.NextDecimal(10, 20) /* returns value beetwen 10..20 */
 ```
 ---
 
-### string.OnlyNumbers()
-Returns a new string containing only the numbers from the original string
+### RandomGenerator.NextEnum()
+Return a random enum value
 ```c#
-"123a".OnlyNumbers() /* return "123" */
-"192".OnlyNumbers() /* return "192" */
-```
----
+private enum SampleEnum
+{
+    Value01,
+    Value02,
+    Value03
+}
 
-### string.OnlyNumbersOrWhiteSpace()
-Returns a new string containing only the numbers or white space from the original string
-```c#
-"123a".OnlyNumbersOrWhiteSpace() /* return "123" */
-"192".OnlyNumbersOrWhiteSpace() /* return "192" */
-"1 23a".OnlyNumbersOrWhiteSpace() /* return "1 23" */
-"1 92".OnlyNumbersOrWhiteSpace() /* return "1 92" */
+RandomGenerator.NextEnum<SampleEnum>() /* returns Value01 or Value02 or Value03 */
 ```
 ---
