@@ -4,7 +4,7 @@
   <metadata>
     <id>Zeats.Legacy.Random</id>
     <version>1.0.0.0</version>
-    <description>Extensions to solve common problems when using strings</description>
+    <description>Extensions to solve common problems when using random values</description>
     <authors>altairsossai@gmail.com</authors>
     <owners>altairsossai</owners>
     <projectUrl>https://github.com/altair-sossai/zeats-legacy-random</projectUrl>
